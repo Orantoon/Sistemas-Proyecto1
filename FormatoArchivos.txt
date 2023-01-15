@@ -1,0 +1,1 @@
+numero$descripcion$tipo$respuestaCorrecta$vecesVerdad^vecesFalso$respuestasMultiples^vecesSeleccionada|$tiempo$puntos$seVaAUsar$vecesUsada$
