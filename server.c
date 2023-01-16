@@ -125,10 +125,12 @@ void acceptNewClient(int serverSocketFD){
 	
 	filePEspera = fopen("pespera.html", "r");
 
-	char paginaEspera[10000] = "HTTP/1.1 200 OK\r\n\n";
+	char paginaEspera[10000];
 	
 	while(true)
 	{
+		paginaEspera = "HTTP/1.1 200 OK\r\n\n";
+		
 		struct AcceptedSocket* clientSocket = acceptIncomingConnection(serverSocketFD);
 		acceptedSockets[acceptedSocketsCount++] = *clientSocket;
 		while (fgets(buffer, sizeof(buffer), filePEspera) != NULL){
@@ -141,6 +143,7 @@ void acceptNewClient(int serverSocketFD){
 		recv(clientSocket->acceptedSocketFD, paginaEspera, 10000, 0);
 		printf("=== %s ===\n\n", paginaEspera);
 		bzero(paginaEspera, sizeof(paginaEspera));
+		bzero(buffer, sizeof(buffer));
 		close(clientSocket->acceptedSocketFD);
 	}
 }
