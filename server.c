@@ -135,8 +135,6 @@ void acceptNewClient(int serverSocketFD){
 		struct AcceptedSocket* clientSocket = acceptIncomingConnection(serverSocketFD);
 		acceptedSockets[acceptedSocketsCount++] = *clientSocket;
 		send(clientSocket->acceptedSocketFD, paginaEspera, 2000, 0);
-		recv(clientSocket->acceptedSocketFD, buffer, 1024, 0);
-		printf("aaa %s aaa\n\n", buffer);
 		close(clientSocket->acceptedSocketFD);
 	}
 }
