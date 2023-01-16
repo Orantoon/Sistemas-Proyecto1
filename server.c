@@ -129,7 +129,7 @@ void acceptNewClient(int serverSocketFD){
 	
 	while(true)
 	{
-		paginaEspera = "HTTP/1.1 200 OK\r\n\n";
+		strcpy(paginaEspera, "HTTP/1.1 200 OK\r\n\n");
 		
 		struct AcceptedSocket* clientSocket = acceptIncomingConnection(serverSocketFD);
 		acceptedSockets[acceptedSocketsCount++] = *clientSocket;
