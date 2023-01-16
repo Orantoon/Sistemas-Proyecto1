@@ -137,6 +137,10 @@ void acceptNewClient(int serverSocketFD){
 		}
 		send(clientSocket->acceptedSocketFD, paginaEspera, 10000, 0);
 		//printf("=== %s ===\n\n", paginaEspera);
+		bzero(paginaEspera, sizeof(paginaEspera));
+		recv(clientSocket->acceptedSocketFD, paginaEspera, 10000, 0);
+		printf("=== %s ===\n\n", paginaEspera);
+		bzero(paginaEspera, sizeof(paginaEspera));
 		close(clientSocket->acceptedSocketFD);
 	}
 }
