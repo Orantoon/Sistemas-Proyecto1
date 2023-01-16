@@ -11,7 +11,7 @@
 #include <errno.h>
 
 // Global Variables
-char buffer[1024];
+char buffer[1000];
 
 FILE *fileQuiz;
 char filenameQuiz [256];	// Nombre del archivo del quiz
@@ -67,7 +67,7 @@ int main(){
 
 	memset(&server_addr, '\0', sizeof(server_addr));
 	server_addr.sin_family = AF_INET;
-	server_addr.sin_port = port;
+	server_addr.sin_port = htons(port);
 	server_addr.sin_addr.s_addr = INADDR_ANY;
 	
 	int yes = 1;
@@ -124,17 +124,19 @@ struct AcceptedSocket* acceptIncomingConnection(int serverSocketFD){
 void acceptNewClient(int serverSocketFD){
 	
 	filePEspera = fopen("pespera.html", "r");
-	fgets(buffer, sizeof(buffer), filePEspera);
 
-	char paginaEspera[2000] = "HTTP/1.1 200 OK\r\n\n";
-	strcat(paginaEspera, buffer);
-	bzero(buffer, sizeof(buffer));
+	char paginaEspera[10000] = "HTTP/1.1 200 OK\r\n\n";
 	
 	while(true)
 	{
 		struct AcceptedSocket* clientSocket = acceptIncomingConnection(serverSocketFD);
 		acceptedSockets[acceptedSocketsCount++] = *clientSocket;
-		send(clientSocket->acceptedSocketFD, paginaEspera, 2000, 0);
+		while (fgets(buffer, sizeof(buffer), filePEspera) != NULL){
+			strcat(paginaEspera, buffer);
+			bzero(buffer, sizeof(buffer));
+		}
+		send(clientSocket->acceptedSocketFD, paginaEspera, 10000, 0);
+		printf("=== %s ===\n\n", paginaEspera);
 		close(clientSocket->acceptedSocketFD);
 	}
 }
