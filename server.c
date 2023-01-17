@@ -537,6 +537,7 @@ int getCantPreg(){
 }
 
 bool isEmpty(){
+	printf("%s\n\n", filenameQuiz);
 	fileQuiz = fopen(filenameQuiz, "r");
 	fseek (fileQuiz, 0, SEEK_END);
 	if (0 == ftell(fileQuiz))
