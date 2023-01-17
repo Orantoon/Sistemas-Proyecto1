@@ -4,48 +4,44 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 
-char *ip = "ec.tec.ac.cr"; 
-int port;
-
 int main(){
 
-	printf("Inserte el puerto que desea usar: ");
-	scanf("%d", &port);
-	printf("\n\n");
+  char *ip = "ec.tec.ac.cr"; 
+  int port = 1194;
 
-	int clientSocket;
-	struct sockaddr_in addr;
-	socklen_t addr_size;
-	char buffer[1024];
-	int n;
+  int sock;
+  struct sockaddr_in addr;
+  socklen_t addr_size;
+  char buffer[1024];
+  int n;
 
-	sock = socket(AF_INET, SOCK_STREAM, 0);
-	if (sock < 0){
-		perror("[-]Socket error");
-		exit(1);
-	}
-	printf("[+]TCP server socket created.\n");
+  sock = socket(AF_INET, SOCK_STREAM, 0);
+  if (sock < 0){
+    perror("[-]Socket error");
+    exit(1);
+  }
+  printf("[+]TCP server socket created.\n");
 
-	memset(&addr, '\0', sizeof(addr));
-	addr.sin_family = AF_INET;
-	addr.sin_port = port;
-	addr.sin_addr.s_addr = inet_addr(ip);
+  memset(&addr, '\0', sizeof(addr));
+  addr.sin_family = AF_INET;
+  addr.sin_port = port;
+  addr.sin_addr.s_addr = inet_addr(ip);
 
-	connect(sock, (struct sockaddr*)&addr, sizeof(addr));
-	printf("Connected to the server.\n");
+  connect(sock, (struct sockaddr*)&addr, sizeof(addr));
+  printf("Connected to the server.\n");
 
-	bzero(buffer, 1024);
-	strcpy(buffer, "HELLO, THIS IS CLIENT.");
-	printf("Client: %s\n", buffer);
-	send(sock, buffer, strlen(buffer), 0);
+  bzero(buffer, 1024);
+  strcpy(buffer, "HELLO, THIS IS CLIENT.");
+  printf("Client: %s\n", buffer);
+  send(sock, buffer, strlen(buffer), 0);
 
-	bzero(buffer, 1024);
-	recv(sock, buffer, sizeof(buffer), 0);
-	printf("Server: %s\n", buffer);
+  bzero(buffer, 1024);
+  recv(sock, buffer, sizeof(buffer), 0);
+  printf("Server: %s\n", buffer);
 
-	close(sock);
-	printf("Disconnected from the server.\n");
+  close(sock);
+  printf("Disconnected from the server.\n");
 
-	return 0;
+  return 0;
 
 }
