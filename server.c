@@ -248,7 +248,7 @@ char* pantallaEspera(){
 	<html>\
 	    	<head>\
 			<meta charset=\"utf-8\">\
-			<meta http-equiv=\"refresh\" content=\"1; URL=http://localhost:2300/?ID=%1%\">\
+			<meta http-equiv=\"refresh\" content=\"1; URL=http://172.19.127.71:2300/?ID=%1%\">\
 			<title>QuizSistemas Cliente Web</title>\
 	    	</head>\
 	    	<body>\
@@ -276,7 +276,7 @@ char* pantallaInicio(){
 	<html>\
 	    	<head>\
 			<meta charset=\"utf-8\">\
-			<meta http-equiv=\"refresh\" content=\"1; URL=http://localhost:2300/?ID=%1%\">\
+			<meta http-equiv=\"refresh\" content=\"1; URL=http://172.19.127.71:2300/?ID=%1%\">\
 			<title>QuizSistemas Cliente Web</title>\
 	    	</head>\
 	    	<body>\
@@ -305,7 +305,7 @@ char* pantallaPregVF(int numPreg, char desc[1000]){
 	<html>\
 	    	<head>\
 			<meta charset=\"utf-8\">\
-			<meta http-equiv=\"refresh\" content=\"1; URL=http://localhost:2300/?ID=%1%\">\
+			<meta http-equiv=\"refresh\" content=\"1; URL=http://172.19.127.71:2300/?ID=%1%\">\
 			<title>QuizSistemas Cliente Web</title>\
 	    	</head>\
 	    	<body>\
@@ -336,7 +336,7 @@ char* pantallaPregMul(int numPreg, char desc[1000], char p1[100], char p2[100], 
 	<html>\
 	    	<head>\
 			<meta charset=\"utf-8\">\
-			<meta http-equiv=\"refresh\" content=\"1; URL=http://localhost:2300/?ID=%1%\">\
+			<meta http-equiv=\"refresh\" content=\"1; URL=http://172.19.127.71:2300/?ID=%1%\">\
 			<title>QuizSistemas Cliente Web</title>\
 	    	</head>\
 	    	<body>\
@@ -491,9 +491,10 @@ void randomizarPregs(int max){
 
 void comenzandoQuiz(){
 	numPantalla = 2;
-	
+	//printf("=== %s ===\n", filenameQuiz);
 	sleep(15);
-	
+	//printf("--- %s ---\n", filenameQuiz);
+	strcpy(filenameQuiz, "prueba.txt");
 	int leyendoPreg = 1;
 	int cantPregs = getCantPreg();
 	while (cantPregs > 0){
